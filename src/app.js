@@ -9,6 +9,7 @@ const usersInfoRouter = require('./users/users-info-router');
 const usersLoginRouter = require('./users/users-login-router');
 const teamsRouter = require('./users/teams-router');
 const projectsRouter = require('./projects/projects-router');
+const tasksRouter = require('./projects/tasks-router');
 
 const app = express()
 
@@ -35,7 +36,7 @@ app.use('/api/users-info', usersInfoRouter)
 app.use('/api/users-login', usersLoginRouter)
 app.use('/api/teams', teamsRouter)
 app.use('/api/projects', projectsRouter)
-//app.use('/api/projects', projectsRouter)
+app.use('/api/tasks', tasksRouter)
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!')
