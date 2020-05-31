@@ -8,7 +8,7 @@ const { NODE_ENV } = require('./config');
 const usersInfoRouter = require('./users/users-info-router');
 const usersLoginRouter = require('./users/users-login-router');
 const teamsRouter = require('./users/teams-router');
-//const projectsRouter = require('.projects/projects-router');
+const projectsRouter = require('./projects/projects-router');
 
 const app = express()
 
@@ -34,6 +34,7 @@ app.use(function errorHandler(error, req, res, next) {
 app.use('/api/users-info', usersInfoRouter)
 app.use('/api/users-login', usersLoginRouter)
 app.use('/api/teams', teamsRouter)
+app.use('/api/projects', projectsRouter)
 //app.use('/api/projects', projectsRouter)
 
 app.get('/', (req, res) => {
