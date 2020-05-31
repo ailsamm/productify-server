@@ -5,7 +5,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const logger = require('./logger');
 const { NODE_ENV } = require('./config');
-const usersRouter = require('./users/users-router');
+const usersInfoRouter = require('./users/users-info-router');
+const usersLoginRouter = require('./users/users-login-router');
 //const projectsRouter = require('.projects/projects-router');
 
 const app = express()
@@ -29,7 +30,8 @@ app.use(function errorHandler(error, req, res, next) {
   res.status(500).json(response)
 })
 
-app.use('/api/users', usersRouter)
+app.use('/api/users-info', usersInfoRouter)
+app.use('/api/users-login', usersLoginRouter)
 //app.use('/api/projects', projectsRouter)
 
 app.get('/', (req, res) => {

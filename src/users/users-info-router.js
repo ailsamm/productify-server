@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const xss = require('xss')
 const UsersInfoService = require('./users-info-service')
-const usersRouter = express.Router()
+const usersInfoRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeUserInfo = user => ({
@@ -13,7 +13,7 @@ const serializeUserInfo = user => ({
   team_id: user.team_id,
 });
 
-usersRouter
+usersInfoRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
@@ -49,7 +49,7 @@ usersRouter
       .catch(next)
   })
 
-  usersRouter
+  usersInfoRouter
   .route('/:user_id')
   .all((req, res, next) => {
     UsersInfoService.getById(
@@ -57,7 +57,6 @@ usersRouter
       req.params.user_id
     )
       .then(user => {
-        console.log(user)
         if (!user) {
           return res.status(404).json({
             error: { message: `User doesn't exist` }
@@ -69,7 +68,6 @@ usersRouter
       .catch(next)
   })
   .get((req, res, next) => {
-    console.log("in here")
     res.json(serializeUserInfo(res.user))
   })
   .delete((req, res, next) => {
@@ -105,4 +103,4 @@ usersRouter
       .catch(next)
   })
 
-module.exports = usersRouter
+module.exports = usersInfoRouter
