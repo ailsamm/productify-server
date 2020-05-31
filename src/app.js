@@ -1,10 +1,12 @@
-require('dotenv').config()
-const express = require('express')
-const morgan = require('morgan')
-const cors = require('cors')
-const helmet = require('helmet')
-const logger = require('./logger')
-const { NODE_ENV } = require('./config')
+require('dotenv').config();
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const helmet = require('helmet');
+const logger = require('./logger');
+const { NODE_ENV } = require('./config');
+const usersRouter = require('./users/users-router');
+//const projectsRouter = require('.projects/projects-router');
 
 const app = express()
 
@@ -26,6 +28,9 @@ app.use(function errorHandler(error, req, res, next) {
   }
   res.status(500).json(response)
 })
+
+app.use('/api/users', usersRouter)
+//app.use('/api/projects', projectsRouter)
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!')
