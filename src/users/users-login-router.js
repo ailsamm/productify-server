@@ -6,7 +6,7 @@ const usersLoginRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeUserLogin = user => ({
-  userId: user.user_id,
+  user_id: user.user_id,
   email_address: xss(user.email_address),
   password: xss(user.password)
 });
