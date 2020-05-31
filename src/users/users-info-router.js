@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const UsersInfoService = require('./users-info-service')
+const usersInfoService = require('./users-info-service')
 const usersInfoRouter = express.Router()
 const jsonParser = express.json()
 
@@ -18,7 +18,7 @@ usersInfoRouter
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     
-    UsersInfoService.getAllUsers(knexInstance)
+    usersInfoService.getAllUsers(knexInstance)
       .then(users => {
         res.json(users.map(serializeUserInfo))
       })
@@ -36,7 +36,7 @@ usersInfoRouter
       }
     }
 
-    UsersInfoService.insertUser(
+    usersInfoService.insertUser(
       req.app.get('db'),
       newUserInfo
     )
@@ -52,7 +52,7 @@ usersInfoRouter
   usersInfoRouter
   .route('/:user_id')
   .all((req, res, next) => {
-    UsersInfoService.getById(
+    usersInfoService.getById(
       req.app.get('db'),
       req.params.user_id
     )
@@ -71,7 +71,7 @@ usersInfoRouter
     res.json(serializeUserInfo(res.user))
   })
   .delete((req, res, next) => {
-    UsersInfoService.deleteUser(
+    usersInfoService.deleteUser(
       req.app.get('db'),
       req.params.user_id
     )
@@ -92,7 +92,7 @@ usersInfoRouter
         }
       })
 
-    UsersInfoService.updateUser(
+    usersInfoService.updateUser(
       req.app.get('db'),
       req.params.user_id,
       userToUpdate
