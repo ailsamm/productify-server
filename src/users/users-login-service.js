@@ -8,7 +8,6 @@ const UsersLoginService = {
           .into('productify_users_login')
           .returning('*')
           .then(rows => {
-            console.log(rows)
             return rows[0]
       })
     },
