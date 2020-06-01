@@ -8,6 +8,7 @@ const jsonParser = express.json()
 const serializeProject = project => ({
   id: project.id,
   project_name: xss(project.project_name),
+  team_id: project.team_id
 });
 
 projectsRouter

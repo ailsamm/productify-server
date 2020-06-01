@@ -8,7 +8,6 @@ const jsonParser = express.json()
 const serializeTeam = team => ({
   id: team.id,
   team_name: xss(team.team_name),
-  team_id: team.team_id
 });
 
 teamsRouter
