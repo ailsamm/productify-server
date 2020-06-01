@@ -23,16 +23,18 @@ usersLoginRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const { first_name, last_name, job_title, team_id, id } = req.body
-    const newUserInfo = { first_name, last_name, job_title, team_id, id }
+    const { email_address, password, user_id } = req.body
+    const newUserInfo = { email_address, password, user_id }
 
-    for (const [key, value] of Object.entries({ first_name, last_name, job_title, team_id, id })) {
+    for (const [key, value] of Object.entries({ email_address, password, user_id })) {
       if (value == null) {
         return res.status(400).json({
           error: { message: `Missing '${key}' in request body` }
         })
       }
     }
+
+    console.log(newUserInfo)
 
     usersLoginService.insertUser(
       req.app.get('db'),
