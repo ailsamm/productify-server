@@ -20,7 +20,7 @@ const UsersInfoService = {
     return knex
       .from('productify_users_info')
       .select('*')
-      .where('id', id)
+      .where({ id })
       .first()
   },
   updateUser(knex, id, newUserFields) {

@@ -20,7 +20,7 @@ const TasksService = {
       return knex
         .from('productify_tasks')
         .select('*')
-        .where('id', id)
+        .where({ id })
         .first()
     },
     updateTask(knex, id, newTaskFields) {

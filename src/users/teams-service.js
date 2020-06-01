@@ -20,7 +20,7 @@ const TeamsService = {
       return knex
         .from('productify_teams')
         .select('*')
-        .where('id', id)
+        .where({ id })
         .first()
     },
     updateTeam(knex, id, newTeamFields) {

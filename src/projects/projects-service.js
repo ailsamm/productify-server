@@ -20,7 +20,7 @@ const ProjectsService = {
       return knex
         .from('productify_projects')
         .select('*')
-        .where('id', id)
+        .where({ id })
         .first()
     },
     updateProject(knex, id, newProjectFields) {
