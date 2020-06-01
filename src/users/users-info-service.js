@@ -8,7 +8,6 @@ const UsersInfoService = {
         .into('productify_users_info')
         .returning('*')
         .then(rows => {
-          console.log(rows)
           return rows[0]
     })
   },

@@ -8,7 +8,6 @@ const TeamsService = {
           .into('productify_teams')
           .returning('*')
           .then(rows => {
-            console.log(rows)
             return rows[0]
       })
     },

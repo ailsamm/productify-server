@@ -8,7 +8,6 @@ const ProjectsService = {
           .into('productify_projects')
           .returning('*')
           .then(rows => {
-            console.log(rows)
             return rows[0]
       })
     },

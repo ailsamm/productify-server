@@ -8,7 +8,6 @@ const TasksService = {
           .into('productify_tasks')
           .returning('*')
           .then(rows => {
-            console.log(rows)
             return rows[0]
       })
     },

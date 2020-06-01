@@ -23,7 +23,7 @@ const STORE = {
         {id:1, teamName: 'Best Team Ever'}
     ],
     projects: [
-        {projectName: "First project", id:1, teamId: 1}, 
+        {projectName: "First project", id:1, teamId: 1},
         {projectName:"Second project", id:2, teamId: 1},
         {projectName:"Third project", id:3, teamId: 1}
     ],
