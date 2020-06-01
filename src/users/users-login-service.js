@@ -11,21 +11,21 @@ const UsersLoginService = {
             return rows[0]
       })
     },
-    deleteUser(knex, id){
+    deleteUser(knex, user_id){
       return knex('productify_users_login')
-          .where({ id })
+          .where({ user_id })
           .delete()
     },
-    getById(knex, id){
+    getById(knex, user_id){
       return knex
         .from('productify_users_login')
         .select('*')
-        .where('id', id)
+        .where({ user_id })
         .first()
     },
-    updateUser(knex, id, newUserFields) {
+    updateUser(knex, user_id, newUserFields) {
       return knex('productify_users_login')
-        .where({ id })
+        .where({ user_id })
         .update(newUserFields)
     }
   }
