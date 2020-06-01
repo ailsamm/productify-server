@@ -6,7 +6,6 @@ const knex = require('knex')
 describe(`Teams service object`, function() {
     let db
     const testTeams = getTestTeams();
-    console.log(testTeams);
     
     before(() => {
         db = knex({
@@ -14,10 +13,6 @@ describe(`Teams service object`, function() {
             connection: process.env.TEST_DATABASE_URL,
         })
     });
-
-    before(() => {
-        knex.raw('TRUNCATE TABLE productify_teams CASCADE')
-    })
 
     beforeEach('Clean the table', () => db.raw('TRUNCATE productify_tasks, productify_users_login, productify_users_info, productify_projects, productify_teams RESTART IDENTITY CASCADE'))
 
