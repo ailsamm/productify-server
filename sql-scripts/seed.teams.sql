@@ -1,5 +1,5 @@
-INSERT INTO productify_teams (team_name)
+INSERT INTO productify_teams (id, team_name)
 VALUES
-  ('Best Team Ever'),
-  ('Rockstars'),
-  ('Wildcats');
+  (1, 'Best Team Ever'),
+  (2, 'Rockstars'),
+  (3, 'Wildcats');
