@@ -34,8 +34,6 @@ usersLoginRouter
       }
     }
 
-    console.log(newUserInfo)
-
     usersLoginService.insertUser(
       req.app.get('db'),
       newUserInfo
