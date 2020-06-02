@@ -106,8 +106,6 @@ describe(`UsersInfo Router from productify_users_info `, function() {
     
     describe(`UsersInfo when productify_users_info table is empty`, () => {
 
-        beforeEach('Clean the table', () => db.raw('TRUNCATE productify_tasks, productify_users_login, productify_users_info, productify_users_info , productify_teams RESTART IDENTITY CASCADE'))
-
         it(`returns empty list when table is empty`, () => {
             return supertest(app)
                 .get('/api/users-info')

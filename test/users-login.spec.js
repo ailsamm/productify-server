@@ -78,8 +78,6 @@ describe(`UsersLogin Router from productify_users_login `, function() {
     
     describe(`UsersLogin when productify_users_login table is empty`, () => {
 
-        beforeEach('Clean the table', () => db.raw('TRUNCATE productify_tasks, productify_users_login, productify_users_login, productify_users_login , productify_teams RESTART IDENTITY CASCADE'))
-
         it(`returns empty list when table is empty`, () => {
             return supertest(app)
                 .get('/api/users-login')
@@ -88,7 +86,6 @@ describe(`UsersLogin Router from productify_users_login `, function() {
 
         it(`posts valid user`, () => {
             const newUser = testUsersLogin[0];
-            console.log(newUser)
             return supertest(app)
                 .post('/api/users-login')
                 .send(newUser)

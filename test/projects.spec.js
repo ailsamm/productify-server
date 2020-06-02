@@ -106,8 +106,6 @@ describe(`Projects Router from productify_projects`, function() {
     
     describe(`Projects when productify_project table is empty`, () => {
 
-        beforeEach('Clean the table', () => db.raw('TRUNCATE productify_tasks, productify_users_login, productify_users_info, productify_projects, productify_teams RESTART IDENTITY CASCADE'))
-
         it(`returns empty list when table is empty`, () => {
             return supertest(app)
                 .get('/api/projects')

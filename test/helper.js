@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 function getTestTeams(){
     return [
         {id: 0, team_name:'Best Team Ever'},
@@ -28,9 +30,18 @@ function getTestUsersLogin() {
     ]
 }
 
+function getTestTasks() {
+    return [
+        {id:1, project_id:1, task_name:'Add time tracking components', description:'blah...', deadline: moment().toISOString(), status:'backlog', assignee:2},
+        {id:2, project_id:1, task_name:'Deploy app', description:'blah...', deadline: moment().toISOString(), status:'backlog', assignee:1},
+        {id:3, project_id:1, task_name:'Set up server', description:'blah...', deadline: moment().toISOString(), status:'inProgress', assignee:3}
+    ]
+}
+
 module.exports = {
     getTestTeams,
     getTestProjects,
     getTestUsersInfo,
-    getTestUsersLogin
+    getTestUsersLogin,
+    getTestTasks
 }
