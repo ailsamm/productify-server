@@ -11,10 +11,20 @@ Username: aaa@gmail.
 
 Password: aaa
 
+Please note that this demo version is intended for demo purposes only. For security purposes, we do not recommend that you sign up using your own personal information.
+
 ## Installation
 
 Simply clone the repo and run ```npm i```
 You can then make requests using, for example, Postman or the Productify client-side app.
 
+## Databases
+This repo contains 5 routers that connect to 5 separate Postgresql tables. These are as follows:
+* /api/users-info - contains personal information about signed up users (first_name, last_name, job_title, id, team_id)
+* /api/users-login - contains log in information about sign up users (email_address, password, user_id)
+* /api/teams - contains information about each registered team (team_name, id)
+* /api/projects - contains information about each existing project (project_name, team_id, id)
+* /api/tasks - contains information about each existing task (task_name, id, description, deadline, project_id, status, assignee)
+
 ## Tech Stack
-The Productify Server is written with NodeJS, Express and hooks up to a Postgresql server. It also makes use of Mocha and Chai for testing purposes.
+The Productify Server is written with NodeJS, Express and hooks up to a Postgresql server using Knex. It also makes use of Mocha and Chai for testing purposes.
