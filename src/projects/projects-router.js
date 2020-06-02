@@ -79,14 +79,14 @@ projectsRouter
       .catch(next)
   })
   .patch(jsonParser, (req, res, next) => {
-    const { project_name } = req.body
-    const projectToUpdate = { project_name }
+    const { project_name, team_id } = req.body
+    const projectToUpdate = { project_name, team_id }
 
     const numberOfValues = Object.values(projectToUpdate).filter(Boolean).length;
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
-          message: `Request body must contain 'project_name'`
+          message: `Request body must contain 'project_name' or 'team_id'`
         }
       })
 
