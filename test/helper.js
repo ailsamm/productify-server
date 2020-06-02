@@ -12,7 +12,16 @@ function getTestProjects() {
     ]
 }
 
+function getTestUsersInfo() {
+    return [
+        {id:1, first_name: "Ada", last_name: "A", job_title:'UI designer', team_id: 1},
+        {id:2, first_name:'Billie', last_name: "B", job_title:'Business lead', team_id: 1},
+        {id:3, first_name:'Caroline', last_name: "C", job_title:'Project manager', team_id: 1},
+    ]
+}
+
 module.exports = {
     getTestTeams,
-    getTestProjects
+    getTestProjects,
+    getTestUsersInfo
 }

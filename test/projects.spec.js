@@ -2,7 +2,7 @@ const app = require('../src/app');
 const { getTestProjects } = require("./helper.js");
 const knex = require('knex')
 
-describe.only(`Projects Router from productify_projects`, function() {
+describe(`Projects Router from productify_projects`, function() {
     let db
     const testProjects = getTestProjects();
     
@@ -116,7 +116,6 @@ describe.only(`Projects Router from productify_projects`, function() {
 
         it(`posts valid project`, () => {
             const newProject = testProjects[0];
-            console.log(newProject)
             return supertest(app)
                 .post('/api/projects')
                 .send(newProject)
