@@ -14,7 +14,7 @@ describe(`UsersInfo Router from productify_users_info `, function() {
         app.set('db', db);
     });
 
-    beforeEach('Clean the table', () => db.raw('TRUNCATE productify_tasks, productify_users_login, productify_users_info, productify_users_info , productify_teams RESTART IDENTITY CASCADE'))
+    beforeEach('Clean the table', () => db.raw('TRUNCATE productify_tasks, productify_users_login, productify_users_info, productify_projects , productify_teams RESTART IDENTITY CASCADE'))
 
     after(() => db.destroy())
 
