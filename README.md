@@ -26,5 +26,69 @@ This repo contains 5 routers that connect to 5 separate Postgresql tables. These
 * /api/projects - contains information about each existing project (project_name, team_id, id)
 * /api/tasks - contains information about each existing task (task_name, id, description, deadline, project_id, status, assignee)
 
+Further details may be found in the 'Endpoints' section.
+
+## API tree
+
+```
+/api
+.
+├── /tasks
+│   └── GET
+│       ├── /
+│       └── /:taskId
+│
+│   └── POST /
+│
+│   └── DELETE /:taskId
+│
+│   └── PATCH /:taskId
+│
+├── /projects
+│   └── GET
+│       ├── /
+│       └── /:projectId
+│
+│   └── POST
+│       └── /
+│
+│   └── DELETE /:projectId
+│
+│   └── PATCH /:projectId
+│
+├── /teams
+│   └── GET
+│       ├── /
+│       └── /:teamId
+│
+│   └── POST /
+│
+│   └── DELETE /:teamId
+│
+│   └── PATCH /:teamId
+│
+├── /users-info
+│   └── GET
+│       ├── /
+│       └── /:userId
+│
+│   └── POST /
+│
+│   └── DELETE /:userId
+│
+│   └── PATCH /:userId
+│
+└── /users-login
+    └── GET
+        ├── /
+        └── /:userId
+ 
+    └── POST /
+ 
+    └── DELETE /:userId
+
+```
+
+
 ## Tech Stack
 The Productify Server is written with NodeJS, Express and hooks up to a Postgresql server using Knex. It also makes use of Mocha and Chai for testing purposes.
