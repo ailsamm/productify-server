@@ -9,4 +9,4 @@ module.exports = {
       : process.env.DATABASE_URL,
   "rejectUnauthorized": false,
   "ssl": !!process.env.SSL,
-}
+};

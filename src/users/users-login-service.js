@@ -30,4 +30,4 @@ const UsersLoginService = {
     }
   }
   
-  module.exports = UsersLoginService
+  module.exports = UsersLoginService;

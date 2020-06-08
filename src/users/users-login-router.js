@@ -1,9 +1,9 @@
-const path = require('path')
-const express = require('express')
-const xss = require('xss')
-const usersLoginService = require('./users-login-service')
-const usersLoginRouter = express.Router()
-const jsonParser = express.json()
+const path = require('path');
+const express = require('express');
+const xss = require('xss');
+const usersLoginService = require('./users-login-service');
+const usersLoginRouter = express.Router();
+const jsonParser = express.json();
 
 const serializeUserLogin = user => ({
   user_id: user.user_id,
@@ -14,23 +14,23 @@ const serializeUserLogin = user => ({
 usersLoginRouter
   .route('/')
   .get((req, res, next) => {
-    const knexInstance = req.app.get('db')
+    const knexInstance = req.app.get('db');
     
     usersLoginService.getAllUsers(knexInstance)
       .then(users => {
-        res.json(users.map(serializeUserLogin))
+        res.json(users.map(serializeUserLogin));
       })
-      .catch(next)
+      .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const { email_address, password, user_id } = req.body
-    const newUserInfo = { email_address, password, user_id }
+    const { email_address, password, user_id } = req.body;
+    const newUserInfo = { email_address, password, user_id };
 
     for (const [key, value] of Object.entries({ email_address, password, user_id })) {
       if (value == null) {
         return res.status(400).json({
           error: { message: `Missing '${key}' in request body` }
-        })
+        });
       }
     }
 
@@ -44,7 +44,7 @@ usersLoginRouter
           .location(path.posix.join(req.originalUrl, `/${user.user_id}`))
           .json(serializeUserLogin(user))
       })
-      .catch(next)
+      .catch(next);
   })
 
   usersLoginRouter
@@ -58,15 +58,15 @@ usersLoginRouter
         if (!user) {
           return res.status(404).json({
             error: { message: `User doesn't exist` }
-          })
+          });
         }
-        res.user = user
-        next()
+        res.user = user;
+        next();
       })
-      .catch(next)
+      .catch(next);
   })
   .get((req, res, next) => {
-    res.json(serializeUserLogin(res.user))
+    res.json(serializeUserLogin(res.user));
   })
   .delete((req, res, next) => {
     usersLoginService.deleteUser(
@@ -76,7 +76,7 @@ usersLoginRouter
       .then(numRowsAffected => {
         res.status(204).end()
       })
-      .catch(next)
+      .catch(next);
   })
 
-module.exports = usersLoginRouter
+module.exports = usersLoginRouter;

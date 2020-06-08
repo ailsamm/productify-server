@@ -1,9 +1,9 @@
-const path = require('path')
-const express = require('express')
-const xss = require('xss')
-const usersInfoService = require('./users-info-service')
-const usersInfoRouter = express.Router()
-const jsonParser = express.json()
+const path = require('path');
+const express = require('express');
+const xss = require('xss');
+const usersInfoService = require('./users-info-service');
+const usersInfoRouter = express.Router();
+const jsonParser = express.json();
 
 const serializeUserInfo = user => ({
   id: user.id,
@@ -20,19 +20,19 @@ usersInfoRouter
     
     usersInfoService.getAllUsers(knexInstance)
       .then(users => {
-        res.json(users.map(serializeUserInfo))
+        res.json(users.map(serializeUserInfo));
       })
-      .catch(next)
+      .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const { first_name, last_name, job_title, team_id, id } = req.body
-    const newUserInfo = { first_name, last_name, job_title, team_id, id }
+    const { first_name, last_name, job_title, team_id, id } = req.body;
+    const newUserInfo = { first_name, last_name, job_title, team_id, id };
 
     for (const [key, value] of Object.entries({ first_name, last_name, job_title, team_id, id })) {
       if (value == null) {
         return res.status(400).json({
           error: { message: `Missing '${key}' in request body` }
-        })
+        });
       }
     }
 
@@ -46,7 +46,7 @@ usersInfoRouter
           .location(path.posix.join(req.originalUrl, `/${user.id}`))
           .json(serializeUserInfo(user))
       })
-      .catch(next)
+      .catch(next);
   })
 
   usersInfoRouter
@@ -60,15 +60,15 @@ usersInfoRouter
         if (!user) {
           return res.status(404).json({
             error: { message: `User doesn't exist` }
-          })
+          });
         }
-        res.user = user
-        next()
+        res.user = user;
+        next();
       })
-      .catch(next)
+      .catch(next);
   })
   .get((req, res, next) => {
-    res.json(serializeUserInfo(res.user))
+    res.json(serializeUserInfo(res.user));
   })
   .delete((req, res, next) => {
     usersInfoService.deleteUser(
@@ -78,11 +78,11 @@ usersInfoRouter
       .then(numRowsAffected => {
         res.status(204).end()
       })
-      .catch(next)
+      .catch(next);
   })
   .patch(jsonParser, (req, res, next) => {
-    const { first_name, last_name, job_title, team_id } = req.body
-    const userToUpdate = { first_name, last_name, job_title, team_id }
+    const { first_name, last_name, job_title, team_id } = req.body;
+    const userToUpdate = { first_name, last_name, job_title, team_id };
 
     const numberOfValues = Object.values(userToUpdate).filter(Boolean).length;
     if (numberOfValues === 0)
@@ -90,7 +90,7 @@ usersInfoRouter
         error: {
           message: `Request body must contain either 'first_name', 'last_name', 'job_title' or 'team_id'`
         }
-      })
+      });
 
     usersInfoService.updateUser(
       req.app.get('db'),
@@ -100,7 +100,7 @@ usersInfoRouter
       .then(numRowsAffected => {
         res.status(204).end()
       })
-      .catch(next)
+      .catch(next);
   })
 
-module.exports = usersInfoRouter
+module.exports = usersInfoRouter;

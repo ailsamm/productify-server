@@ -1,29 +1,29 @@
 const app = require('../src/app');
 const { getTestTasks } = require("./helper.js");
-const knex = require('knex')
+const knex = require('knex');
 
 describe(`Tasks Router from productify_tasks `, function() {
-    let db
+    let db;
     const testTasks = getTestTasks();
     
     before(() => {
         db = knex({
             client: 'pg',
             connection: process.env.TEST_DATABASE_URL,
-        })
+        });
         app.set('db', db);
     });
 
-    beforeEach('Clean the table', () => db.raw('TRUNCATE productify_tasks, productify_users_login, productify_users_info, productify_projects , productify_teams RESTART IDENTITY CASCADE'))
+    beforeEach('Clean the table', () => db.raw('TRUNCATE productify_tasks, productify_users_login, productify_users_info, productify_projects , productify_teams RESTART IDENTITY CASCADE'));
 
-    after(() => db.destroy())
+    after(() => db.destroy());
 
     beforeEach(() => {
-        return db.raw("ALTER TABLE productify_tasks DISABLE TRIGGER ALL;")
+        return db.raw("ALTER TABLE productify_tasks DISABLE TRIGGER ALL;");
     });
 
     afterEach(() => {
-        return db.raw("ALTER TABLE productify_tasks ENABLE TRIGGER ALL;")
+        return db.raw("ALTER TABLE productify_tasks ENABLE TRIGGER ALL;");
     });
  
     describe(`Tasks when table is populated`, () => {
@@ -37,7 +37,7 @@ describe(`Tasks Router from productify_tasks `, function() {
             return supertest(app)
                 .get('/api/tasks')
                 .expect(200, testTasks)
-        })
+        });
 
         it(`deletes valid task`, () => {
             const taskToDelete = testTasks[0];
@@ -49,31 +49,31 @@ describe(`Tasks Router from productify_tasks `, function() {
                     supertest(app)
                         .get('/api/tasks')
                         .expect(200, remainingTask)
-                })
-        })
+                });
+        });
 
         it(`tries to delete non-existent task`, () => {
             return supertest(app)
                 .delete(`/api/tasks/99`)
                 .expect(404, {
                     error: { message: `Task doesn't exist` }
-                })
-        })
+                });
+        });
 
         it(`fetches specific task`, () => {
             const taskToFetch = testTasks[0];
             return supertest(app)
                 .get(`/api/tasks/${taskToFetch.id}`)
                 .expect(200, taskToFetch)
-        })
+        });
 
         it(`tries to fetch non-existent task`, () => {
             return supertest(app)
             .get(`/api/tasks/99`)
             .expect(404, {
                 error: { message: `Task doesn't exist` }
-            })
-        })
+            });
+        });
 
         it(`patches task with valid field`, () => {
             const taskToPatch = testTasks[0];
@@ -89,9 +89,9 @@ describe(`Tasks Router from productify_tasks `, function() {
                 .get(`/api/tasks/${taskToPatch.id}`)
                 .then(res => {
                     expect(res.body).to.eql(expected)
-                })
-            })
-        })
+                });
+            });
+        });
 
         it(`tries to patch task with invalid fields`, () => {
             const taskToPatch = testTasks[0];
@@ -101,9 +101,9 @@ describe(`Tasks Router from productify_tasks `, function() {
             .send(newFields)
             .expect(400, {
                 error: { message: "Request body must contain either 'task_name', 'description', 'deadline', 'status' or 'assignee'." }
-            })
-        })
-    })
+            });
+        });
+    });
     
     describe(`Tasks when productify_tasks table is empty`, () => {
 
@@ -111,7 +111,7 @@ describe(`Tasks Router from productify_tasks `, function() {
             return supertest(app)
                 .get('/api/tasks')
                 .expect(200, [])
-        })
+        });
 
         it(`posts valid task`, () => {
             const newTask = testTasks[0];
@@ -134,13 +134,13 @@ describe(`Tasks Router from productify_tasks `, function() {
                     .get(`/api/tasks/${res.body.id}`)
                     .expect(res.body)
                 )
-        })
+        });
         it(`posts invalid task entry`, () => {
             const invalidTask = {id:4};
             return supertest(app)
                 .post('/api/tasks')
                 .send(invalidTask)
                 .expect(400)
-        })
+        });
     })
 })
