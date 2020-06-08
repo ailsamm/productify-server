@@ -81,7 +81,7 @@ usersInfoRouter
       .catch(next)
   })
   .patch(jsonParser, (req, res, next) => {
-    const { first_name, last_name, job_title, team_id, id } = req.body
+    const { first_name, last_name, job_title, team_id } = req.body
     const userToUpdate = { first_name, last_name, job_title, team_id }
 
     const numberOfValues = Object.values(userToUpdate).filter(Boolean).length;

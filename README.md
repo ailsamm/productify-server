@@ -317,7 +317,7 @@ Further details may be found in the 'Endpoints' section.
 ```
 // req.params
 {
-  id: Integer,
+  teamId: Integer,
 }
 
 // res.body
@@ -337,6 +337,97 @@ Further details may be found in the 'Endpoints' section.
 // req.body
 {
   team_name: String
+}
+
+// res.body
+{
+  status: 204
+}
+```
+
+### GET ```/api/users-info```
+
+```
+// res.body
+[
+  {
+    id: Integer,
+    first_name: String,
+    last_name: String,
+    job_title: String,
+    team_id: Integer
+  }
+]
+```
+
+### POST ```/api/users-info```
+
+```
+// req.body
+{
+  id: Integer,
+  first_name: String,
+  last_name: String,
+  job_title: String,
+  team_id: Integer
+}
+
+// res.body
+{
+  id: Integer,
+  first_name: String,
+  last_name: String,
+  job_title: String,
+  team_id: Integer
+}
+```
+
+### GET ```/api/users-info/:userId```
+
+```
+// req.params
+{
+  userId: Integer
+}
+
+// res.body
+{
+  id: Integer,
+  first_name: String,
+  last_name: String,
+  job_title: String,
+  team_id: Integer
+}
+```
+
+### DELETE ```/api/users-info/:userId```
+
+```
+// req.params
+{
+  userId: Integer,
+}
+
+// res.body
+{
+  status: 204
+}
+```
+
+### PATCH ```/api/users-info/:userId```
+
+```
+// req.params
+{
+  userId: Integer
+}
+
+// req.body
+{
+  first_name: String,
+  last_name: String,
+  job_title: String,
+  team_id: Integer
 }
 
 // res.body
