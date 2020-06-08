@@ -170,6 +170,181 @@ Further details may be found in the 'Endpoints' section.
 }
 ```
 
+### GET ```/api/tasks```
+
+```
+// res.body
+[
+ {
+  id: Integer,
+  project_id: Integer,
+  task_name: String,
+  description: String,
+  deadline: String,
+  status: String,
+  assignee: Integer
+ }
+]
+```
+
+### POST ```/api/tasks```
+
+```
+// req.body
+{
+  id: Integer,
+  project_id: Integer,
+  task_name: String,
+  description: String,
+  deadline: String,
+  assignee: Integer
+}
+
+// res.body
+{
+  id: Integer,
+  project_id: Integer,
+  task_name: String,
+  description: String,
+  deadline: String,
+  status: String,
+  assignee: Integer
+}
+```
+
+### GET ```/api/tasks/:taskId```
+
+```
+// req.params
+{
+  taskId: Integer
+}
+
+// res.body
+{
+  id: Integer,
+  project_id: Integer,
+  task_name: String,
+  description: String,
+  deadline: String,
+  status: String,
+  assignee: Integer
+ }
+```
+
+### DELETE ```/api/tasks/:taskId```
+
+```
+// req.params
+{
+  taskId: Integer
+}
+
+// res.body
+{
+  status: 204
+}
+```
+
+### PATCH ```/api/tasks/:taskId```
+
+```
+// req.params
+{
+  taskId: Integer
+}
+
+// req.body
+{
+  task_name: String,
+  description: String,
+  status: String, 
+  assignee: Integer,
+  deadline: String
+}
+
+// res.body
+{
+  status: 204
+}
+```
+
+### GET ```/api/teams```
+
+```
+// res.body
+[
+ {
+  id: Integer,
+  team_name: String
+ }
+]
+```
+
+### POST ```/api/teams```
+
+```
+// req.body
+{
+  id: Integer,
+  team_name: String
+}
+
+// res.body
+{
+  id: Integer,
+  team_name: String
+}
+```
+
+### GET ```/api/teams/:teamId```
+
+```
+// req.params
+{
+  teamId: Integer
+}
+
+// res.body
+{
+  id: Integer,
+  team_name: String
+}
+```
+
+### DELETE ```/api/teams/:teamId```
+
+```
+// req.params
+{
+  id: Integer,
+}
+
+// res.body
+{
+  status: 204
+}
+```
+
+### PATCH ```/api/teams/:teamId```
+
+```
+// req.params
+{
+  teamId: Integer
+}
+
+// req.body
+{
+  team_name: String
+}
+
+// res.body
+{
+  status: 204
+}
+```
+
 
 ## Tech Stack
 The Productify Server is written with NodeJS, Express and hooks up to a Postgresql server using Knex. It also makes use of Mocha and Chai for testing purposes.
