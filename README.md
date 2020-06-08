@@ -436,6 +436,66 @@ Further details may be found in the 'Endpoints' section.
 }
 ```
 
+### GET ```/api/users-login```
+
+```
+// res.body
+[
+  {
+    user_id: Integer,
+    email_address: String,
+    password: String
+  }
+]
+```
+
+### POST ```/api/users-login```
+
+```
+// req.body
+{
+  user_id: Integer,
+  email_address: String,
+  password: String
+}
+
+// res.body
+{
+  user_id: Integer,
+  email_address: String,
+  password: String
+}
+```
+
+### GET ```/api/users-login/:userId```
+
+```
+// req.params
+{
+  userId: Integer
+}
+
+// res.body
+{
+  user_id: Integer,
+  email_address: String,
+  password: String
+}
+```
+
+### DELETE ```/api/users-login/:userId```
+
+```
+// req.params
+{
+  userId: Integer,
+}
+
+// res.body
+{
+  status: 204
+}
+```
 
 ## Tech Stack
 The Productify Server is written with NodeJS, Express and hooks up to a Postgresql server using Knex. It also makes use of Mocha and Chai for testing purposes.
