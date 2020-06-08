@@ -28,7 +28,7 @@ This repo contains 5 routers that connect to 5 separate Postgresql tables. These
 
 Further details may be found in the 'Endpoints' section.
 
-## API tree
+## API Overview
 
 ```
 /api
@@ -87,6 +87,87 @@ Further details may be found in the 'Endpoints' section.
  
     └── DELETE /:userId
 
+```
+
+## Endpoint specifications
+### GET ```/api/projects```
+
+```
+// res.body
+[
+ {
+  id: Integer,
+  project_name: String,
+  team_id: Integer
+ }
+]
+```
+
+### POST ```/api/projects```
+
+```
+// req.body
+{
+  id: Integer,
+  project_name: String,
+  team_id: Integer
+}
+
+// res.body
+{
+  id: Integer,
+  project_name: String,
+  team_id: Integer
+}
+```
+
+### GET ```/api/projects/:projectId```
+
+```
+// req.params
+{
+  projectId: Integer
+}
+
+// res.body
+{
+  id: Integer,
+  project_name: String,
+  team_id: Integer
+}
+```
+
+### DELETE ```/api/projects/:projectId```
+
+```
+// req.params
+{
+  projectId: Integer
+}
+
+// res.body
+{
+  status: 204
+}
+```
+
+### PATCH ```/api/projects/:projectId```
+
+```
+// req.params
+{
+  projectId: Integer
+}
+
+// req.body
+{
+  project_name: String
+}
+
+// res.body
+{
+  status: 204
+}
 ```
 
 

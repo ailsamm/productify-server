@@ -1,9 +1,9 @@
-const path = require('path')
-const express = require('express')
-const xss = require('xss')
+const path = require('path');
+const express = require('express');
+const xss = require('xss');
 const projectsService = require('./projects-service')
-const projectsRouter = express.Router()
-const jsonParser = express.json()
+const projectsRouter = express.Router();
+const jsonParser = express.json();
 
 const serializeProject = project => ({
   id: project.id,
@@ -14,23 +14,23 @@ const serializeProject = project => ({
 projectsRouter
   .route('/')
   .get((req, res, next) => {
-    const knexInstance = req.app.get('db')
+    const knexInstance = req.app.get('db');
     
     projectsService.getAllProjects(knexInstance)
       .then(projects => {
-        res.json(projects.map(serializeProject))
+        res.json(projects.map(serializeProject));
       })
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const { project_name, team_id, id } = req.body
-    const newProject = { project_name, team_id, id }
+    const { project_name, team_id, id } = req.body;
+    const newProject = { project_name, team_id, id };
 
     for (const [key, value] of Object.entries({ project_name, team_id, id })) {
       if (value == null) {
         return res.status(400).json({
           error: { message: `Missing '${key}' in request body` }
-        })
+        });
       }
     }
 
@@ -44,7 +44,7 @@ projectsRouter
           .location(path.posix.join(req.originalUrl, `/${project.id}`))
           .json(serializeProject(project))
       })
-      .catch(next)
+      .catch(next);
   })
 
   projectsRouter
@@ -58,12 +58,12 @@ projectsRouter
         if (!project) {
           return res.status(404).json({
             error: { message: `Project doesn't exist` }
-          })
+          });
         }
-        res.project = project
-        next()
+        res.project = project;
+        next();
       })
-      .catch(next)
+      .catch(next);
   })
   .get((req, res, next) => {
     res.json(serializeProject(res.project))
@@ -76,11 +76,11 @@ projectsRouter
       .then(numRowsAffected => {
         res.status(204).end()
       })
-      .catch(next)
+      .catch(next);
   })
   .patch(jsonParser, (req, res, next) => {
-    const { project_name, team_id } = req.body
-    const projectToUpdate = { project_name, team_id }
+    const { project_name, team_id } = req.body;
+    const projectToUpdate = { project_name, team_id };
 
     const numberOfValues = Object.values(projectToUpdate).filter(Boolean).length;
     if (numberOfValues === 0)
@@ -88,7 +88,7 @@ projectsRouter
         error: {
           message: `Request body must contain 'project_name' or 'team_id'`
         }
-      })
+      });
 
     projectsService.updateProject(
       req.app.get('db'),
@@ -96,9 +96,9 @@ projectsRouter
       projectToUpdate
     )
       .then(numRowsAffected => {
-        res.status(204).end()
+        res.status(204).end();
       })
-      .catch(next)
+      .catch(next);
   })
 
-module.exports = projectsRouter
+module.exports = projectsRouter;
